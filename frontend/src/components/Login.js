@@ -23,11 +23,11 @@ const Login = () => {
       setSuccess('Successfully logged in!');
       setError(null);
 
-      // Wait for 5 seconds before redirecting to home page
+      // Wait for 2 seconds before redirecting to problem section
       setTimeout(() => {
         setLoading(false);
-        navigate('/');
-      }, 5000);
+        navigate('/problems'); // Redirect to problem section
+      }, 2000);
     } catch (err) {
       console.error(err);
       if (err.response && err.response.data && err.response.data.message) {
@@ -67,7 +67,7 @@ const Login = () => {
         </button>
       </form>
       {error && <p className="error">{error}</p>} {/* Apply error class */}
-      {success && <p className="success">{success} Redirecting to home page...</p>} {/* Apply success class */}
+      {success && <p className="success">{success} Redirecting to problem section...</p>} {/* Apply success class */}
       {loading && <div className="spinner"></div>} {/* Apply spinner class */}
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Register.css'; // Import the CSS file
+import './Register.css';
 
 const Register = () => {
   const [firstname, setFirstname] = useState('');
@@ -10,7 +10,6 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [redirecting, setRedirecting] = useState(false); // New state for redirecting
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -25,12 +24,12 @@ const Register = () => {
       console.log(response.data);
       setSuccess(response.data.message);
       setError(null);
-      setRedirecting(true); // Set redirecting to true
 
+      // Wait for 1 minute (60,000 milliseconds) before redirecting to login page
       setTimeout(() => {
         navigate('/login');
-      }, 5000);
-      
+      }, 60000);
+
     } catch (err) {
       console.error(err);
       if (err.response && err.response.data && err.response.data.message) {
@@ -39,15 +38,14 @@ const Register = () => {
         setError('Registration failed, please try again.');
       }
       setSuccess(null);
-      setRedirecting(false); // Ensure redirecting is false in case of error
     }
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label>First Name:</label>
           <input
             type="text"
@@ -56,7 +54,7 @@ const Register = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Last Name:</label>
           <input
             type="text"
@@ -65,7 +63,7 @@ const Register = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Email:</label>
           <input
             type="email"
@@ -74,7 +72,7 @@ const Register = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Password:</label>
           <input
             type="password"
@@ -85,14 +83,8 @@ const Register = () => {
         </div>
         <button type="submit">Register</button>
       </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-      {redirecting && (
-        <div className="redirecting">
-          <p>Directing to Login Page</p>
-          <div className="loader"></div>
-        </div>
-      )}
+      {error && <p className="error">{error}</p>}
+      {success && <p className="success">{success} Redirecting to login page...</p>}
     </div>
   );
 };

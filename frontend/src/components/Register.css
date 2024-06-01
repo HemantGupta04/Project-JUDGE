@@ -1,22 +1,93 @@
-.redirecting {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+.container {
+    max-width: 400px; /* Increase the max-width */
+    margin: 50px auto; /* Add some top margin for spacing */
+    padding: 40px; /* Increase the padding */
+    border: 1px solid #bf3333;
+    border-radius: 10px; /* Increase the border-radius */
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    text-align: left; /* Align text to the left */
   }
   
-  .loader {
-    margin-top: 10px;
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Make the label text bold */
+    color: black; /* Change label color */
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%; /* Make inputs full-width */
+    padding: 10px;
+    margin-top: 5px; /* Add some top margin */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-size: 16px; /* Increase font size */
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow on focus */
+    outline: none; /* Remove the default outline */
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px; /* Increase font size */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px; /* Add some top margin */
+  }
+  
+  .success {
+    color: green;
+    margin-top: 10px; /* Add some top margin */
+  }
+  
+  .spinner {
+    margin: 20px auto; /* Center the spinner horizontally */
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #22a6b3;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 2s linear infinite;
+    width: 36px;
+    height: 36px;
+    animation: spin 1s linear infinite;
   }
   
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
   
