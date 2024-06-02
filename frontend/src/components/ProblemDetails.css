@@ -1,0 +1,18 @@
+.problem-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.problem-content {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.compiler-placeholder {
+    flex: 1;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

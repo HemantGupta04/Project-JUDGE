@@ -1,0 +1,54 @@
+.box {
+    position: absolute;
+    margin: 20px;
+}
+
+.problem-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.problem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.problem-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.problem-title {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.problem-tags, .difficulty {
+    margin-right: 10px;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute;
+    right: 10px;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}

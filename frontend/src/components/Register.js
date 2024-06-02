@@ -30,7 +30,7 @@ const Register = () => {
       // Wait for 1 minute (60,000 milliseconds) before redirecting to login page
       setTimeout(() => {
         navigate('/login');
-      }, 60000);
+      }, 2000);
 
     } catch (err) {
       console.error(err);

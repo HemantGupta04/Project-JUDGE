@@ -1,0 +1,55 @@
+/* CreateProblem.css */
+
+.create-problem-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.create-problem-container h2 {
+    text-align: center;
+}
+
+.create-problem-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-problem-container form div {
+    margin-bottom: 10px;
+}
+
+.create-problem-container form label {
+    margin-bottom: 5px;
+}
+
+.create-problem-container form input,
+.create-problem-container form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.create-problem-container form button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.create-problem-container form button:hover {
+    background-color: #218838;
+}
+
+.create-problem-container p {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}

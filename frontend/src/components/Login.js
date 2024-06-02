@@ -1,76 +1,55 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Login.css'; // Import login.css
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await axios.post('http://localhost:4000/login', {
-        email,
-        password,
-      });
-      console.log(response.data);
-      setSuccess('Successfully logged in!');
-      setError(null);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:4000/login', { email, password });
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('email', email);
+            setMessage(response.data.message);
+            const isAdmin = email === 'heemantgupta2014@gmail.com';
+            localStorage.setItem('isAdmin', isAdmin);
+            navigate('/problems', { state: { isAdmin } });
+        } catch (error) {
+            setMessage(error.response?.data || 'An error occurred');
+        }
+    };
 
-      // Wait for 2 seconds before redirecting to problem section
-      setTimeout(() => {
-        setLoading(false);
-        navigate('/problems'); // Redirect to problem section
-      }, 2000);
-    } catch (err) {
-      console.error(err);
-      if (err.response && err.response.data && err.response.data.message) {
-        setError(err.response.data.message);
-      } else {
-        setError('Login failed, please try again.');
-      }
-      setSuccess(null);
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="container"> {/* Apply container class */}
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group"> {/* Apply form-group class */}
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    return (
+        <div>
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Email:</label>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            {message && <p>{message}</p>}
         </div>
-        <div className="form-group"> {/* Apply form-group class */}
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-      {error && <p className="error">{error}</p>} {/* Apply error class */}
-      {success && <p className="success">{success} Redirecting to problem section...</p>} {/* Apply success class */}
-      {loading && <div className="spinner"></div>} {/* Apply spinner class */}
-    </div>
-  );
+    );
 };
 
 export default Login;
