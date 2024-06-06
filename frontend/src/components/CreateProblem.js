@@ -28,56 +28,29 @@ const CreateProblem = () => {
         }
     };
 
+    const handleCompile = async (code) => {
+        try {
+            // Call backend API to compile code
+            const response = await axios.post('http://localhost:4000/api/compile', { code });
+            console.log(response.data); // Handle response
+        } catch (error) {
+            console.error('Error compiling code:', error);
+        }
+    };
+
     return (
         <div className="create-problem-container">
             <h2>Create Problem</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title:</label>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Description:</label>
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    ></textarea>
-                </div>
-                <div>
-                    <label>Tags:</label>
-                    <input
-                        type="text"
-                        value={tags}
-                        onChange={(e) => setTags(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Difficulty:</label>
-                    <input
-                        type="text"
-                        value={difficulty}
-                        onChange={(e) => setDifficulty(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Sample Test Case:</label>
-                    <textarea
-                        value={sampleTestCase}
-                        onChange={(e) => setSampleTestCase(e.target.value)}
-                        required
-                    ></textarea>
-                </div>
+                {/* Form inputs */}
                 <button type="submit">Create</button>
             </form>
             {message && <p>{message}</p>}
+            <div>
+                <h2>Compile Code</h2>
+                <textarea value={sampleTestCase} onChange={(e) => setSampleTestCase(e.target.value)}></textarea>
+                <button onClick={() => handleCompile(sampleTestCase)}>Compile</button>
+            </div>
         </div>
     );
 };

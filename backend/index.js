@@ -1,13 +1,17 @@
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
+import path from 'path';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import { DBConnection } from './database/db.js';
+import { generateFile } from './generateFile.js';
+import { generateInputFile } from './generateInputFile.js';
+import { executeCpp } from './executeCpp.js';
 import User from './models/User.js';
-import problemRoutes from './routes/problemRoutes.js'; // Import problem routes
-
+import problemRoutes from './routes/problemRoutes.js';
 import dotenv from 'dotenv';
+
 dotenv.config({ path: './../ONLINE_JUDGE/backend/.env' });
 
 const app = express();
@@ -99,6 +103,30 @@ app.post("/login", async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: error.message || "Server error" });
+    }
+});
+
+app.post("/run", async (req, res) => {
+    const { language = 'cpp', code, input } = req.body;
+
+    if (!code) {
+        return res.status(400).json({ success: false, error: "Empty code body!" });
+    }
+
+    try {
+        // Generate code file based on the language
+        const filePath = await generateFile(language, code);
+        
+        // Generate input file
+        const inputPath = await generateInputFile(input);
+        
+        // Execute the C++ code with the input file
+        const output = await executeCpp(filePath, inputPath);
+        
+        res.json({ filePath, output });
+    } catch (error) {
+        console.error(`Error during code execution: ${error.message}`);
+        res.status(500).json({ success: false, error: error.message });
     }
 });
 
