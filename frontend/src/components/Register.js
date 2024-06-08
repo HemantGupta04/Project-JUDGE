@@ -23,6 +23,7 @@ const Register = () => {
         email,
         password,
       });
+      localStorage.setItem('userId', response.data.userId);
       console.log(response.data);
       setSuccess(response.data.message);
       setError(null);

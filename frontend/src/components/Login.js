@@ -13,6 +13,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:4000/login', { email, password });
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('userId', response.data.userId);
             localStorage.setItem('email', email);
             setMessage(response.data.message);
             const isAdmin = email === 'heemantgupta2014@gmail.com';

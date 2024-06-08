@@ -1,0 +1,78 @@
+/* Compiler.css */
+
+.bg-red-100 {
+    background-color: #fee2e2;
+}
+
+.bg-gray-100 {
+    background-color: #f7fafc;
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-sm {
+    border-radius: 0.125rem;
+}
+
+.p-4 {
+    padding: 1rem;
+}
+
+.h-28 {
+    height: 7rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+/* New style for run button */
+.run-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Smaller padding */
+    font-size: 14px; /* Smaller font size */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.run-button:hover {
+    background-color: #218838;
+}
+/* Compiler.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Ensure the container takes up the full width */
+}
+
+.left-side {
+    flex: 1; /* Make the left side take up the remaining space */
+}
+
+.right-side {
+    flex: 1; /* Make the right side take up the remaining space */
+}
+
+.compiler-editor {
+    height: 80vh; /* Set the height of the editor to 80% of the viewport height */
+    max-width: 100%; /* Ensure the editor takes up the full width */
+}
+
+.input-textarea {
+    height: 20vh; /* Set the height of the input textarea to 20% of the viewport height */
+    max-width: 100%; /* Ensure the textarea takes up the full width */
+}

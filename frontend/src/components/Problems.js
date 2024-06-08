@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Problems.css';
 
 const Problems = () => {
     const [problems, setProblems] = useState([]);
     const location = useLocation();
+    const navigate = useNavigate();
     const isAdmin = location.state?.isAdmin || false;
     const [message, setMessage] = useState(location.state?.message || '');
 
@@ -34,6 +35,10 @@ const Problems = () => {
         }
     };
 
+    const handleProblemClick = (id) => {
+        navigate(`/problems/${id}/compiler`);
+    };
+
     return (
         <div className="box">
             <h2>Problem Section</h2>
@@ -48,18 +53,19 @@ const Problems = () => {
             {problems.length > 0 ? (
                 <ul className="problem-list">
                     {problems.map((problem) => (
-                        <li className="problem" key={problem._id}>
+                        <li className="problem" key={problem._id} onClick={() => handleProblemClick(problem._id)}>
                             <div className="problem-details">
-                                <Link to={`/problems/${problem._id}`}>
-                                    <span className="problem-title">{problem.title}</span>
-                                </Link>
+                                <span className="problem-title">{problem.title}</span>
                                 <span className="problem-tags">{problem.tags}</span>
                                 <span className="difficulty">{problem.difficulty}</span>
                             </div>
                             {isAdmin && (
                                 <button
                                     className="delete-button"
-                                    onClick={() => handleDelete(problem._id)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDelete(problem._id);
+                                    }}
                                 >
                                     D
                                 </button>

@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs';
 import path from 'path';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
-import multer from 'multer';
 import { DBConnection } from './database/db.js';
 import { generateFile } from './generateFile.js';
 import { generateInputFile } from './generateInputFile.js';
@@ -13,12 +12,10 @@ import User from './models/User.js';
 import problemRoutes from './routes/problemRoutes.js';
 import Submission from './models/Submission.js';
 import dotenv from 'dotenv';
-import fs from 'fs/promises';
 
 dotenv.config({ path: './../ONLINE_JUDGE/backend/.env' });
 
 const app = express();
-const upload = multer(); // Initialize multer for file uploads
 
 app.use(cors({
     origin: 'http://localhost:3000', // Replace with your frontend URL
@@ -28,8 +25,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-app.use('/uploads', express.static('uploads'));
 
 DBConnection();
 
@@ -135,45 +130,15 @@ app.post("/run", async (req, res) => {
         res.status(500).json({ success: false, error: error.message, line: error.line });
     }
 });
-
-app.post('/upload', upload.single('file'), async (req, res) => {
+app.post("/api/submit-code", async (req, res) => {
     try {
+        // Extract data from request body
         const { problem_id, user_id, language, code } = req.body;
-        const file = req.file;
-
-        // Handle case where no file is uploaded
-        if (!file) {
-            return res.status(400).json({ success: false, message: 'No file uploaded.' });
-        }
-
-        // Generate code file from user submission
-        const filePath = await generateFile(language, code);
-
-        // Execute user code
-        const inputFilePath = path.join('uploads', 'input.txt'); // assuming input.txt is provided
-        const output = await executeCpp(filePath, inputFilePath);
-
-        // Save the output to solution.txt
-        const solutionFilePath = path.join('uploads', 'solution.txt');
-        await fs.writeFile(solutionFilePath, output);
-
-        // Read the expected output
-        const expectedOutputFilePath = path.join('uploads', 'expected_output.txt'); // assuming expected_output.txt is provided
-        const expectedOutput = await fs.readFile(expectedOutputFilePath, 'utf8');
-
-        // Compare the generated solution with the expected output
-        const isCorrect = output.trim() === expectedOutput.trim();
-
+        
         // Save submission to the database
-        const submission = await Submission.create({
-            problem_id,
-            user_id,
-            language,
-            code,
-            output,
-            status: isCorrect ? 'correct' : 'incorrect'
-        });
+        const submission = await Submission.create({ problem_id, user_id, language, code, status: 'pending' });
 
+        // Send response
         res.status(201).json({ success: true, message: 'Submission successful!', submission });
     } catch (error) {
         console.error('Error submitting code:', error);
@@ -181,9 +146,13 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     }
 });
 
+// Get submissions endpoint
 app.get("/api/submissions", async (req, res) => {
     try {
+        // Fetch all submissions
         const submissions = await Submission.find().populate('problem_id').populate('user_id');
+        
+        // Send response
         res.status(200).json({ success: true, submissions });
     } catch (error) {
         console.error('Error fetching submissions:', error);
@@ -191,9 +160,13 @@ app.get("/api/submissions", async (req, res) => {
     }
 });
 
+// Get submission details endpoint
 app.get("/api/submissions/:id", async (req, res) => {
     try {
+        // Fetch submission details by ID
         const submission = await Submission.findById(req.params.id).populate('problem_id').populate('user_id');
+        
+        // Send response
         if (submission) {
             res.status(200).json({ success: true, submission });
         } else {

@@ -32,7 +32,8 @@ const executeCpp = (filepath, inputPath = '') => {
     exec(compileCommand, (compileError, compileStdout, compileStderr) => {
       if (compileError) {
         console.error(`Compilation error: ${compileError}`);
-        reject({ error: compileError, stderr: compileStderr });
+        const errorLine = parseErrorLine(compileStderr);
+        reject({ error: compileError.message, stderr: compileStderr, line: errorLine });
         return;
       }
 
@@ -46,7 +47,7 @@ const executeCpp = (filepath, inputPath = '') => {
       exec(runCommand, (runError, runStdout, runStderr) => {
         if (runError) {
           console.error(`Execution error: ${runError}`);
-          reject({ error: runError, stderr: runStderr });
+          reject({ error: runError.message, stderr: runStderr });
           return;
         }
 
@@ -60,6 +61,16 @@ const executeCpp = (filepath, inputPath = '') => {
       });
     });
   });
+};
+
+/**
+ * Parses the compilation error to find the line number of the error.
+ * @param {string} stderr - The stderr from the compilation process.
+ * @returns {number|null} - The line number of the error, or null if not found.
+ */
+const parseErrorLine = (stderr) => {
+  const match = stderr.match(/:(\d+):/);
+  return match ? parseInt(match[1], 10) : null;
 };
 
 export { executeCpp };

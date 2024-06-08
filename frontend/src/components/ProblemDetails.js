@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+// import SubmissionForm from './SubmissionForm';
 
 const ProblemDetails = () => {
     const { id } = useParams();
@@ -31,6 +32,9 @@ const ProblemDetails = () => {
             <p>Difficulty: {problem.difficulty}</p>
             <h3>Sample Test Case</h3>
             <pre>{problem.sampleTestCase}</pre>
+            
+            {/* Integration of SubmissionForm component */}
+            {/* <SubmissionForm problemId={id} /> */}
         </div>
     );
 };

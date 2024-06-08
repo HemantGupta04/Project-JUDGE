@@ -1,61 +1,96 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Editor from 'react-simple-code-editor';
+import { highlight, languages } from 'prismjs';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-c';
+import 'prismjs/components/prism-cpp';
+import 'prismjs/themes/prism.css';
+import { useNavigate } from 'react-router-dom';
+import './Compiler.css'; 
 
-const Compiler = () => {
-    const [code, setCode] = useState('');
-    const [language, setLanguage] = useState('cpp'); // Default language is C++
+const Compiler = ({ problemId }) => {
+    const [code, setCode] = useState(`#include <iostream>
+using namespace std;
+
+int main() {
+    int num1, num2, sum;
+    cin >> num1 >> num2;
+    sum = num1 + num2;
+    cout << "The sum of the two numbers is: " << sum;
+    return 0;
+}`);
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true); // Set loading state to true while waiting for the response
-        setError(''); // Reset error state
+    const handleRun = async () => {
+        const payload = {
+            language: 'cpp',
+            code,
+            input
+        };
+
+        setLoading(true);
 
         try {
-            const response = await axios.post('/run', { language, code, input });
-            setOutput(response.data.output);
+            const { data } = await axios.post('http://localhost:4000/run', payload);
+            setOutput(data.output);
         } catch (error) {
-            console.error('Error executing code:', error);
-            setError('Error occurred during code execution.');
+            console.log(error.response);
+            setOutput('Error occurred during code execution.');
         } finally {
-            setLoading(false); // Reset loading state after receiving the response
+            setLoading(false);
         }
     };
 
+    const handleSubmit = () => {
+        localStorage.setItem('submittedCode', code);
+        navigate(`/submission/${problemId}`);
+    };
+
     return (
-        <div>
-            <h2>Code Compiler</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="code">Code:</label>
-                    <textarea id="code" value={code} onChange={(e) => setCode(e.target.value)} />
-                </div>
-                <div>
-                    <label htmlFor="language">Language:</label>
-                    <select id="language" value={language} onChange={(e) => setLanguage(e.target.value)}>
-                        <option value="cpp">C++</option>
-                        <option value="java">Java</option>
-                        {/* Add other language options here */}
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="input">Input:</label>
-                    <textarea id="input" value={input} onChange={(e) => setInput(e.target.value)} />
-                </div>
-                <button type="submit" disabled={loading}>
+        <div className="compiler-container">
+            <div className="editor-section">
+                <h1>Online Code Compiler</h1>
+                <Editor
+                    value={code}
+                    onValueChange={code => setCode(code)}
+                    highlight={code => highlight(code, languages.cpp)}
+                    padding={10}
+                    style={{
+                        fontFamily: '"Fira code", "Fira Mono", monospace',
+                        fontSize: 12,
+                        backgroundColor: '#f7fafc',
+                        height: '300px',
+                        overflowY: 'auto'
+                    }}
+                />
+                <button onClick={handleRun} disabled={loading}>
                     {loading ? 'Running...' : 'Run Code'}
                 </button>
-            </form>
-            {error && <div>Error: {error}</div>} {/* Display error message if there is an error */}
-            {output && (
-                <div>
-                    <h3>Output:</h3>
+                <button onClick={handleSubmit} disabled={loading}>
+                    {loading ? 'Submitting...' : 'Submit Code'}
+                </button>
+            </div>
+            <div className="io-section">
+                <div className="input-section">
+                    <h2>Input</h2>
+                    <textarea
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="Enter input"
+                        rows="5"
+                        cols="15"
+                    />
+                </div>
+                <div className="output-section">
+                    <h2>Output</h2>
                     <pre>{output}</pre>
                 </div>
-            )}
+            </div>
         </div>
     );
 };
