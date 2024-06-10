@@ -8,13 +8,16 @@ import CreateProblem from './components/CreateProblem';
 import Compiler from './components/Compiler';
 import ProblemWithCompiler from './components/ProblemWithCompiler';
 import SubmissionPage from './components/SubmissionPage'; // Import the new component
+import Home from './components/Home';
+import './App.css';
+
 
 function App() {
     // const isAdmin = localStorage.getItem('email') === 'heemantgupta2014@gmail.com';
 
     return (
         <Router>
-            <nav>
+            <nav className='navbar'> 
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/register">Register</Link></li>
@@ -33,8 +36,11 @@ function App() {
                 <Route path="/compiler" element={<Compiler />} />
                 <Route path="/problems/:id/compiler" element={<ProblemWithCompiler />} /> {/* New route */}
                 <Route path="/submission/:problemId" element={<SubmissionPage />} /> {/* Route for submission page */}
-                <Route path="/" element={<h1>Welcome to our App!</h1>} />
+                <Route path="/" element={<Home />} /> {/* Home page route */}
             </Routes>
+            <footer className="footer">
+                <p>&copy; 2024 Online Judge. All rights reserved.</p>
+            </footer>
         </Router>
     );
 }

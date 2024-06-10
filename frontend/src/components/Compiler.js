@@ -7,24 +7,26 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-c';
 import 'prismjs/components/prism-cpp';
 import 'prismjs/themes/prism.css';
-import { useNavigate } from 'react-router-dom';
 import './Compiler.css'; 
+import { useParams } from 'react-router-dom';
 
 const Compiler = ({ problemId }) => {
     const [code, setCode] = useState(`#include <iostream>
 using namespace std;
 
 int main() {
+  for(int i=0;i<3;i++){
     int num1, num2, sum;
     cin >> num1 >> num2;
     sum = num1 + num2;
-    cout << "The sum of the two numbers is: " << sum;
-    return 0;
+    cout<< sum<<" ";
+  }
+  return 0;
 }`);
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
+    const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
 
     const handleRun = async () => {
         const payload = {
@@ -45,10 +47,21 @@ int main() {
             setLoading(false);
         }
     };
-
-    const handleSubmit = () => {
-        localStorage.setItem('submittedCode', code);
-        navigate(`/submission/${problemId}`);
+    
+    const { id } = useParams();
+    const handleSubmit = async () => {
+        console.log(id);
+        setLoading(true);
+        try {
+            const { data } = await axios.post('http://localhost:4000/submitCode', {id, code });
+            setResults([data.results]);
+            console.log('Submission result:', data); // Assume one test case based on your example
+        } catch (error) {
+            console.log(error.response);
+            setResults([{ error: 'Error occurred during code submission.' }]);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -90,6 +103,18 @@ int main() {
                     <h2>Output</h2>
                     <pre>{output}</pre>
                 </div>
+            </div>
+            <div className="results-section">
+                <h2>Results</h2>
+                {results.length > 0 && results.map((result, index) => (
+                    <div key={index} className={`result ${result.passed ? 'passed' : 'failed'}`}>
+                        <h3>Test Case {index + 1}</h3>
+                        <p><strong>Input:</strong> {result.input}</p>
+                        <p><strong>Expected Output:</strong> {result.expectedOutput}</p>
+                        <p><strong>Actual Output:</strong> {result.actualOutput}</p>
+                        <p><strong>Status:</strong> {result.passed ? 'Passed' : 'Failed'}</p>
+                    </div>
+                ))}
             </div>
         </div>
     );

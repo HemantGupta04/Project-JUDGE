@@ -1,36 +1,39 @@
-.app-container {
-  display: flex;
-  height: 100vh;
-}
+/* App.css */
 
-.problem-section {
-  flex: 1;
-  padding: 20px;
-  border-right: 1px solid #ccc;
-  overflow-y: auto;
-}
-
-.compiler-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.compiler {
-  flex: 1;
-  border-bottom: 1px solid #ccc;
-  overflow-y: auto;
-}
-
-.input-output {
-  height: 30%;
-  display: flex;
-  flex-direction: column;
-}
-
-.input, .output {
-  flex: 1;
+.navbar {
+  background-color: #333;
   padding: 10px;
-  border-top: 1px solid #ccc;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.navbar ul li {
+  float: left;
+}
+
+.navbar ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar ul li a:hover {
+  background-color: #111;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }

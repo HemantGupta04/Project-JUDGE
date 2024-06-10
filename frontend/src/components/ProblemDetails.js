@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 const ProblemDetails = () => {
     const { id } = useParams();
     const [problem, setProblem] = useState(null);
-
+    console.log(id);
     useEffect(() => {
         const fetchProblem = async () => {
             try {

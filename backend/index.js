@@ -13,13 +13,23 @@ import User from './models/User.js';
 import problemRoutes from './routes/problemRoutes.js';
 import Submission from './models/Submission.js';
 import dotenv from 'dotenv';
-import fs from 'fs/promises';
+// import fs from 'fs/promises';
+import Problem from './models/Problem.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import fs from 'fs';
+import axios from 'axios';
+import compareOutputs from './compare.js';
 
-dotenv.config({ path: './../ONLINE_JUDGE/backend/.env' });
+// Convert import.meta.url to __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
+dotenv.config({ path: './../ONLINEJUDGE/backend/.env' });
 
 const app = express();
 const upload = multer(); // Initialize multer for file uploads
-
 app.use(cors({
     origin: 'http://localhost:3000', // Replace with your frontend URL
     credentials: true,
@@ -37,6 +47,8 @@ app.get("/", (req, res) => {
     res.send("Hello, world!!");
 });
 
+console.log(process.env.SECRET_KEY);
+console.log(process.env.PORT);
 app.post("/register", async (req, res) => {
     try {
         const { firstname, lastname, email, password } = req.body;
@@ -122,13 +134,13 @@ app.post("/run", async (req, res) => {
     try {
         // Generate code file based on the language
         const filePath = await generateFile(language, code);
-        
+
         // Generate input file
         const inputPath = await generateInputFile(input);
-        
+
         // Execute the C++ code with the input file
         const output = await executeCpp(filePath, inputPath);
-        
+
         res.json({ filePath, output });
     } catch (error) {
         console.error(`Error during code execution: ${error.message}`);
@@ -180,6 +192,75 @@ app.post('/upload', upload.single('file'), async (req, res) => {
         res.status(500).json({ success: false, error: 'Internal server error' });
     }
 });
+app.post("/submitCode", async (req, res) => {
+    const { id, code } = req.body;
+
+    try {
+        // Add logging to debug issues
+        console.log('Received submission for problem:', id);
+        console.log('Code:', code);
+
+        const problem = await Problem.findById(id);
+
+        if (!problem) {
+            return res.status(404).json({ error: 'Problem not found' });
+        }
+        console.log('**********12');
+        console.log(__dirname);
+
+        // Construct the correct paths to the input and output files
+        const inputFile = path.join(__dirname, 'uploads', problem.title, 'input', `${problem.title}_input.txt`);
+        const expectedOutputFile = path.join(__dirname, 'uploads', problem.title, 'output', `${problem.title}_output.txt`);
+
+        console.log('Input file path:', inputFile);
+        console.log('Expected output file path:', expectedOutputFile);
+
+        // Read the contents of the input and output files
+        const inputFileContent = fs.readFileSync(inputFile, 'utf-8');
+        const expectedOutputContent = fs.readFileSync(expectedOutputFile, 'utf-8');
+
+        console.log('Input file content:', inputFileContent);
+        console.log('Expected output content:', expectedOutputContent);
+
+        console.log('**********00');
+
+
+        const payload = {
+            language: 'cpp',
+            code,
+            input: inputFileContent,
+        };
+
+        // Log the payload being sent to the code execution service
+        console.log('Payload for code execution:', payload);
+
+        const { data } = await axios.post('http://localhost:4000/run', payload);
+        const actualOutput = data.output.trim();
+
+        // Simulate reading the expected output from a file or database
+        const expectedOutput = expectedOutputContent.trim();
+        const input = inputFileContent.trim();
+        console.log('********');
+        console.log(expectedOutput);
+        console.log('********');
+        console.log(actualOutput);
+        const passed = compareOutputs(actualOutput,expectedOutput);
+
+        res.json({
+            passed,
+            results: {
+                input,
+                expectedOutput,
+                actualOutput,
+                passed,
+            },
+        });
+    } catch (error) {
+        console.error('Error during code submission:', error);
+        res.status(500).json({ error: 'Error occurred during code submission.' });
+    }
+});
+
 
 app.get("/api/submissions", async (req, res) => {
     try {

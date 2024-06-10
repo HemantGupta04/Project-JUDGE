@@ -1,0 +1,49 @@
+/* Home.css */
+
+.home-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.home-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.home-container p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.home-links {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.home-link {
+    flex: 1;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-width: 300px;
+}
+
+.home-link h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.home-link p {
+    font-size: 1em;
+}
+
+.home-link a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.home-link a:hover {
+    text-decoration: underline;
+}
