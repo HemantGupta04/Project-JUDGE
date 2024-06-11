@@ -90,6 +90,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
             return res.status(400).send("No file uploaded.");
         }
         const filePath = await saveUploadedFile(req.file, req.body.questionTitle, req.body.type);
+        console.log(filePath);
         res.status(200).json({ success: true, filePath });
     } catch (error) {
         console.error(error);

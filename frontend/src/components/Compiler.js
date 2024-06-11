@@ -11,7 +11,16 @@ import './Compiler.css';
 import { useParams } from 'react-router-dom';
 
 const Compiler = ({ problemId }) => {
-    const [code, setCode] = useState('');
+    const [code, setCode] = useState(`#include <iostream> 
+using namespace std; 
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+       // your code{pls remove this line}
+    } 
+    return 0; 
+} `);
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
     const [results, setResults] = useState([]);

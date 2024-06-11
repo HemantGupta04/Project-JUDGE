@@ -44,7 +44,7 @@ const Problems = () => {
             <h2>Problem Section</h2>
             {message && <p>{message}</p>}
             {isAdmin && (
-                <div>
+                <div className='create'>
                     <Link to="/create-problem">
                         <button>Create Problem</button>
                     </Link>
@@ -56,9 +56,10 @@ const Problems = () => {
                         <li className="problem" key={problem._id} onClick={() => handleProblemClick(problem._id)}>
                             <div className="problem-details">
                                 <span className="problem-title">{problem.title}</span>
-                                <span className="problem-tags">{problem.tags}</span>
-                                <span className="difficulty">{problem.difficulty}</span>
                             </div>
+                            <span className={`difficulty ${problem.difficulty.toLowerCase()}`}>
+                                {problem.difficulty}
+                            </span>
                             {isAdmin && (
                                 <button
                                     className="delete-button"

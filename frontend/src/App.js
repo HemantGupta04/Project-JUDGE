@@ -10,14 +10,15 @@ import ProblemWithCompiler from './components/ProblemWithCompiler';
 import SubmissionPage from './components/SubmissionPage'; // Import the new component
 import Home from './components/Home';
 import './App.css';
-
+import logo from './logo.png';
 
 function App() {
     // const isAdmin = localStorage.getItem('email') === 'heemantgupta2014@gmail.com';
+    const firstname = localStorage.getItem('firstname');
 
     return (
         <Router>
-            <nav className='navbar'> 
+            <nav className="navbar">
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/register">Register</Link></li>
@@ -26,6 +27,8 @@ function App() {
                     {/* {isAdmin && <li><Link to="/create-problem">Create Problem</Link></li>} */}
                     {/* <li><Link to="/compiler">Compiler</Link></li> */}
                 </ul>
+                <img src={logo} alt="Logo" className="logo" />
+                {firstname && <span className="welcome-message">Welcome, {firstname}</span>}
             </nav>
             <Routes>
                 <Route path="/register" element={<Register />} />

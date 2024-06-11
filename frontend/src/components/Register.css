@@ -10,10 +10,11 @@
     height: 1384px;
     background-color: #f9f9f9;
     padding: 24px;
-    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
     /* background-size: cover; */
-}
-
+} 
 .form-box {
     margin-top: 0%;
     background-color: white;
@@ -102,8 +103,9 @@ h2{
     color: #aaa;
 }
 .image-section {
-    width: 30%;
-    background-image: url('./images2.jpeg');
+    height: 480px;
+    width: 500px;
+    background-image: url('./image2.jpeg');
     background-size: cover;
     background-position: center;
   }

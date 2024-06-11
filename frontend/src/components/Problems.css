@@ -1,4 +1,5 @@
 .box {
+    width: 1400px;
     position: absolute;
     margin: 20px;
 }
@@ -12,25 +13,32 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid #ccc;
     padding: 10px;
-    border: 1px solid #ddd;
     margin-bottom: 10px;
-    border-radius: 5px;
-    position: relative;
+    cursor: pointer;
 }
 
 .problem-details {
+    font-size: 23px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
 }
 
 .problem-title {
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
-.problem-tags, .difficulty {
-    margin-right: 10px;
+.problem-tags {
+    font-style: italic;
+}
+
+.difficulty {
+    font-weight: bold;
+    margin-right: 7%;
 }
 
 .delete-button {
@@ -48,7 +56,33 @@
     position: absolute;
     right: 10px;
 }
-
 .delete-button:hover {
     background-color: darkred;
+}
+
+.difficulty.easy {
+    color: aliceblue;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(55, 230, 55);
+}
+
+.difficulty.medium {
+    color: aliceblue;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(238, 238, 63);
+}
+
+.difficulty.hard {
+    color: aliceblue;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: lightcoral;
+}
+.create{
+    width:15%;
 }

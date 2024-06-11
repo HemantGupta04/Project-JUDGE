@@ -1,6 +1,7 @@
-/* App.css */
-
 .navbar {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: space-between; /* Space out items */
+  align-items: center; /* Center items vertically */
   background-color: #333;
   padding: 10px;
 }
@@ -9,11 +10,11 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  display: flex; /* Flexbox for horizontal list */
 }
 
 .navbar ul li {
-  float: left;
+  margin-right: 10px; /* Add space between list items */
 }
 
 .navbar ul li a {
@@ -26,6 +27,13 @@
 
 .navbar ul li a:hover {
   background-color: #111;
+}
+
+.navbar .logo {
+  padding: 0;
+  height: 60px;
+  margin-right: 7%; /* Adjust height as needed */
+  margin-left: auto; /* Push the logo to the right */
 }
 
 .footer {

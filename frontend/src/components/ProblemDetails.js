@@ -25,7 +25,7 @@ const ProblemDetails = () => {
     }
 
     return (
-        <div>
+        <div className='prob'>
             <h2>{problem.title}</h2>
             <p>{problem.description}</p>
             <p>Tags: {problem.tags}</p>

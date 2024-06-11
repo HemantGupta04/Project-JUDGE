@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
-import image2 from './images2.jpeg';
+import image2 from './image2.jpeg';
 
 const Register = () => {
   const [firstname, setFirstname] = useState('');
@@ -47,7 +47,7 @@ const Register = () => {
       // 
       <div className="container">
         <div className="image-section">
-          <img src={image2} alt="Background" className="image" />
+          {/* <img src={image2} alt="Background" className="image" /> */}
         </div>
         <div className="form-box">
           <h2>Register</h2>

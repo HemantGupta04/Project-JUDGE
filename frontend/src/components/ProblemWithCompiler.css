@@ -9,6 +9,7 @@
 }
 
 .problem-details {
+    /* background-color: aqua; */
     padding: 20px;
     border-right: 1px solid #ddd;
 }
@@ -16,3 +17,6 @@
 .compiler-section {
     padding: 20px;
 }
+/* h2{
+    background-color: aqua;
+} */

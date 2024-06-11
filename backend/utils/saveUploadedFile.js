@@ -3,7 +3,7 @@ import path from 'path';
 
 export const saveUploadedFile = async (file, questionTitle, type) => {
     try {
-        const uploadsDir = path.join(process.cwd(), 'uploads');
+        const uploadsDir = path.join('backend', 'uploads');
         const questionDir = path.join(uploadsDir, questionTitle);
 
         // Create the question directory if it doesn't exist
