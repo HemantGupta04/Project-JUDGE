@@ -11,18 +11,7 @@ import './Compiler.css';
 import { useParams } from 'react-router-dom';
 
 const Compiler = ({ problemId }) => {
-    const [code, setCode] = useState(`#include <iostream>
-using namespace std;
-
-int main() {
-  for(int i=0;i<3;i++){
-    int num1, num2, sum;
-    cin >> num1 >> num2;
-    sum = num1 + num2;
-    cout<< sum<<" ";
-  }
-  return 0;
-}`);
+    const [code, setCode] = useState('');
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
     const [results, setResults] = useState([]);

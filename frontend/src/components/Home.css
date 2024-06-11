@@ -1,49 +1,95 @@
-/* Home.css */
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 .home-container {
-    text-align: center;
-    padding: 20px;
-}
-
-.home-container h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-
-.home-container p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-}
-
-.home-links {
+    
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f7fafc;
+    padding: 24px;
+}
+
+.home-content {
+    background-size: cover;
+    margin-top: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 60%;
+}
+
+.welcome-message {
+    
+    font-size: 4rem; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    color: #212121;
+
+
+}
+
+.description {
+    font-size: 1.25rem;
+    color: #4a5568;
+}
+
+.home-sidebar {
+    margin-top: 6%;
+    margin-right: 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 30%;
 }
 
 .home-link {
-    flex: 1;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    max-width: 300px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+    width: 100%;
+    text-align: center;
 }
 
 .home-link h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.home-link p {
-    font-size: 1em;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 
 .home-link a {
-    color: #007BFF;
+    color: #3182ce;
     text-decoration: none;
 }
 
 .home-link a:hover {
     text-decoration: underline;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.description {
+    width: 600px;
+    font-size: 1.25rem;
+    color:#212121;
+    font-family: 'Poppins', sans-serif; /* Apply the same font family */
+    opacity: 0; /* Initially hide the paragraph */
+}
+
+.animated-text {
+    animation: fadeIn 2s forwards; /* Apply the fadeIn animation */
+}
+.highlight{
+    color:lightcoral;
+    text-decoration: underline;
+    font-style: italic;
 }

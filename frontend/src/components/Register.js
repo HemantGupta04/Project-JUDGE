@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
-import Navbar from './Navbar'; // Import Navbar
-import Footer from './Footer'; // Import Footer
+import image2 from './images2.jpeg';
 
 const Register = () => {
   const [firstname, setFirstname] = useState('');
@@ -45,54 +44,58 @@ const Register = () => {
   };
 
   return (
-    <div id="root">
-      <Navbar /> {/* Include Navbar */}
+      // 
       <div className="container">
-        <h2>Register</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>First Name:</label>
-            <input
-              type="text"
-              value={firstname}
-              onChange={(e) => setFirstname(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Last Name:</label>
-            <input
-              type="text"
-              value={lastname}
-              onChange={(e) => setLastname(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit">Register</button>
-        </form>
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success} Redirecting to login page...</p>}
+        <div className="image-section">
+          <img src={image2} alt="Background" className="image" />
+        </div>
+        <div className="form-box">
+          <h2>Register</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>First Name:</label>
+              <input
+                type="text"
+                value={firstname}
+                onChange={(e) => setFirstname(e.target.value)}
+                required
+                placeholder='firstname'
+              />
+              <label>Last Name:</label>
+              <input
+                type="text"
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
+                required
+                placeholder='lastname'
+              />
+            </div>
+            <div className="form-group">
+              <label>Email:</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder='email'
+              />
+            </div>
+            <div className="form-group">
+              <label>Password:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder='password'
+              />
+            </div>
+            <button type="submit">Register</button>
+          </form>
+          {error && <p className="error">{error}</p>}
+          {success && <p className="success">{success} Redirecting to login page...</p>}
+        </div>
       </div>
-      <Footer /> {/* Include Footer */}
-    </div>
   );
 };
 

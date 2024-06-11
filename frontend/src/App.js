@@ -24,7 +24,7 @@ function App() {
                     <li><Link to="/login">Login</Link></li>
                     <li><Link to="/problems">Problems</Link></li>
                     {/* {isAdmin && <li><Link to="/create-problem">Create Problem</Link></li>} */}
-                    <li><Link to="/compiler">Compiler</Link></li>
+                    {/* <li><Link to="/compiler">Compiler</Link></li> */}
                 </ul>
             </nav>
             <Routes>
