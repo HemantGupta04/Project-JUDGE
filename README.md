@@ -164,7 +164,7 @@ Docker-compose up -d
 ### 2. Problem Management: users can create, view, edit, and delete problems.
 
 
-<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/result.png" height="300px" width="550"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/problem.png" height="300px" width="550"/>
 
 
 ### 3. Code Submission: Users can submit their code for problems, which will be compiled and executed.
