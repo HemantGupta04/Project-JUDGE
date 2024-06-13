@@ -34,18 +34,18 @@ This is a full-stack online judge platform built with the MERN stack (MongoDB, E
 ### Technologies Used
 
 #### Frontend: React, Axios
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/f234f9fa-ed17-4cb4-bdc9-60342e1e0bcd" width="150" height="150" />
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/imagesMERN.png" width="150" height="150" />
 
 #### Backend: Node.js, Express, MongoDB, Mongoose
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/0f9c5307-3084-43fc-8350-771b83628b64" height="150" width="200"/>
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/9f13bc0d-a06c-4309-a395-dbb9447f343e" height="150" width="200"/>
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/6098952d-49c0-493f-9477-56c5848b5f88" height="150" width="150"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/MERN3.png" height="150" width="200"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/MERN2.png" height="150" width="200"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/MERN%24.png" height="150" width="150"/>
 
 #### Compiler: Node.js, Docker
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/b6a5412d-2a75-4b35-802f-840e79f9caf2" height="150" width="150" />
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/docker.png" height="150" width="150" />
 
 #### Authentication: JWT (JSON Web Token)
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/529011b8-896c-48d6-9a4b-0259bfc50011" height="150" width="250"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/jwt.png" height="150" width="250"/>
 
 
 ### Prerequisites
@@ -62,12 +62,6 @@ This is a full-stack online judge platform built with the MERN stack (MongoDB, E
 git clone https://github.com/HemantGupta04/Project-OnlineJudge.git
 cd OnlineJudge/backend
 ```
-
-#### Install dependencies:
-```git
-npm install
-```
-
 #### Install dependencies:
 
 ```git
@@ -105,12 +99,6 @@ REACT_APP_BACKEND_URL=backend_url
 nodemon index.js
 ```
 
-#### Compiler
-##### Start the compiler server (this contains all the routes for compiling and judging code)
-
-```git
-nodemon compiler.js
-```
 
 #### Frontend
 ##### Start the frontend server
@@ -165,28 +153,30 @@ Docker-compose up -d
 ### 1. User Registration and Login: Users can register and log in to the platform.
 
 
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/b40eb827-b812-480e-9348-3b839240e7a3" height="300px" width="550"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/home.png" height="300px" width="550"/>
 
 
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/11f7dbe2-6157-46d6-ac6f-1c0f69db3d7b" height="300px" width="550"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/register.png" height="300px" width="550"/>
+
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/login.png" height="300px" width="550"/>
 
 
 ### 2. Problem Management: users can create, view, edit, and delete problems.
 
 
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/2c4fc536-8594-4448-8591-f4f70d1ae47c" height="300px" width="550"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/result.png" height="300px" width="550"/>
 
 
 ### 3. Code Submission: Users can submit their code for problems, which will be compiled and executed.
 
 
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/3156688c-c005-4ade-a4e1-4d77d81c342f"  height="300px" width="550"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/compiler.png"  height="300px" width="550"/>
 
 
 ### 4. Submit your code for problems and get them judged.
 
 
-<img src="https://github.com/Arpan783808/OJ-Project/assets/123624309/4a076f15-31e3-4e8b-8ea9-83c0c308be1f" height="300px" width="550"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/result.png" height="300px" width="550"/>
 
 
  
