@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+const host = process.env.REACT_APP_BACKEND_URL;
 
 const SubmissionPage = () => {
     const { problemId } = useParams(); // Get the problemId from the URL
@@ -27,7 +28,7 @@ const SubmissionPage = () => {
         formData.append('code', code); // Append the code if necessary
 
         try {
-            const response = await axios.post('http://localhost:4000/api/submit-code', formData, {
+            const response = await axios.post(`${host}/api/submit-code`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

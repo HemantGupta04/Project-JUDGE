@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './CreateProblem.css';
+const host = process.env.REACT_APP_BACKEND_URL;
 
 const CreateProblem = () => {
     const [title, setTitle] = useState('');
@@ -26,7 +27,7 @@ const CreateProblem = () => {
             formData.append('inputFile', inputFile);
             formData.append('outputFile', outputFile);
 
-            await axios.post('http://localhost:4000/api/problems', formData);
+            await axios.post(`⁠ ${host}/api/problems `, formData);
 
             setMessage('Problem created successfully!');
             setTimeout(() => {

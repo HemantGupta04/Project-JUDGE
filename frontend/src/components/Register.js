@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import image2 from './image2.jpeg';
+const host = process.env.REACT_APP_BACKEND_URL;
 
 const Register = () => {
   const [firstname, setFirstname] = useState('');
@@ -16,7 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/register', {
+      const response = await axios.post(`${host}/register`, {
         firstname,
         lastname,
         email,

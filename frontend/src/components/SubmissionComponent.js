@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+const host = process.env.REACT_APP_BACKEND_URL;
 const SubmissionComponent = () => {
     const [code, setCode] = useState('');
     const [result, setResult] = useState(null);
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/api/submit-code', {
+            const response = await axios.post(`${host}/api/submit-code`, {
                 problem_id: 'someProblemId',
                 user_id: 'someUserId',
                 language: 'cpp',

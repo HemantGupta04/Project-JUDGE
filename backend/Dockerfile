@@ -1,7 +1,4 @@
-
-ARG NODE_VERSION=20.9.0
-
-FROM node:${NODE_VERSION}-alpine
+FROM node:20-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN apk add --no-cache g++ 

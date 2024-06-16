@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 // import SubmissionForm from './SubmissionForm';
+const host = process.env.REACT_APP_BACKEND_URL;
 
 const ProblemDetails = () => {
     const { id } = useParams();
@@ -10,7 +11,7 @@ const ProblemDetails = () => {
     useEffect(() => {
         const fetchProblem = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/problems/${id}`);
+                const response = await axios.get(`${host}/api/problems/${id}`);
                 setProblem(response.data);
             } catch (error) {
                 console.error('Error fetching problem details:', error);

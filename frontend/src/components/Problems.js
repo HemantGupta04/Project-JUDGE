@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Problems.css';
+const host = process.env.REACT_APP_BACKEND_URL;
 
 const Problems = () => {
     const [problems, setProblems] = useState([]);
@@ -13,7 +14,7 @@ const Problems = () => {
     useEffect(() => {
         const fetchProblems = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/problems');
+                const response = await axios.get(`${host}/api/problems`);
                 setProblems(response.data);
             } catch (error) {
                 console.error('Error fetching problems:', error);
@@ -27,7 +28,7 @@ const Problems = () => {
         const confirmation = window.confirm("Are you sure you want to delete this problem?");
         if (confirmation) {
             try {
-                await axios.delete(`http://localhost:4000/api/problems/${id}`);
+                await axios.delete(`${host}/api/problems/${id}`);
                 setProblems(problems.filter(problem => problem._id !== id));
             } catch (error) {
                 console.error('Error deleting problem:', error);

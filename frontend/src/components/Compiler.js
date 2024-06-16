@@ -9,6 +9,7 @@ import 'prismjs/components/prism-cpp';
 import 'prismjs/themes/prism.css';
 import './Compiler.css'; 
 import { useParams } from 'react-router-dom';
+const host = process.env.REACT_APP_BACKEND_URL;
 
 const Compiler = ({ problemId }) => {
     const [code, setCode] = useState(`#include <iostream> 
@@ -36,7 +37,7 @@ int main() {
         setLoading(true);
 
         try {
-            const { data } = await axios.post('http://localhost:4000/run', payload);
+            const { data } = await axios.post(`⁠ ${host}/run ⁠`, payload);
             setOutput(data.output);
         } catch (error) {
             console.log(error.response);
@@ -51,7 +52,7 @@ int main() {
         console.log(id);
         setLoading(true);
         try {
-            const { data } = await axios.post('http://localhost:4000/submitCode', {id, code });
+            const { data } = await axios.post(`⁠${host}/submitCode`, {id, code });
             setResults([data.results]);
             console.log('Submission result:', data); // Assume one test case based on your example
         } catch (error) {
