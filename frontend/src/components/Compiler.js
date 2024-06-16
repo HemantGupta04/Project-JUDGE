@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Editor from 'react-simple-code-editor';
+// import Editor from 'react-simple-code-editor';
 // import { highlight, languages } from 'prismjs';
 // import 'prismjs/components/prism-clike';
 // import 'prismjs/components/prism-javascript';
@@ -67,10 +67,9 @@ int main() {
         <div className="compiler-container">
             <div className="editor-section">
                 <h1>Online Code Compiler</h1>
-                <Editor
+                
                     value={code}
                     onValueChange={code => setCode(code)}
-                    // highlight={code => highlight(code, languages.cpp)}
                     padding={10}
                     style={{
                         fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -79,7 +78,6 @@ int main() {
                         height: '300px',
                         overflowY: 'auto'
                     }}
-                />
                 <button onClick={handleRun} disabled={loading}>
                     {loading ? 'Running...' : 'Run Code'}
                 </button>
