@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Editor from 'react-simple-code-editor';
-import { highlight, languages } from 'prismjs';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-c';
-import 'prismjs/components/prism-cpp';
-import 'prismjs/themes/prism.css';
+// import { highlight, languages } from 'prismjs';
+// import 'prismjs/components/prism-clike';
+// import 'prismjs/components/prism-javascript';
+// import 'prismjs/components/prism-c';
+// import 'prismjs/components/prism-cpp';
+// import 'prismjs/themes/prism.css';
 import './Compiler.css'; 
 import { useParams } from 'react-router-dom';
 const host = process.env.REACT_APP_BACKEND_URL;
@@ -70,7 +70,7 @@ int main() {
                 <Editor
                     value={code}
                     onValueChange={code => setCode(code)}
-                    highlight={code => highlight(code, languages.cpp)}
+                    // highlight={code => highlight(code, languages.cpp)}
                     padding={10}
                     style={{
                         fontFamily: '"Fira code", "Fira Mono", monospace',
