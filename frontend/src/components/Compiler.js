@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import Editor from 'react-simple-code-editor';
-// import { highlight, languages } from 'prismjs';
-// import 'prismjs/components/prism-clike';
-// import 'prismjs/components/prism-javascript';
-// import 'prismjs/components/prism-c';
-// import 'prismjs/components/prism-cpp';
-// import 'prismjs/themes/prism.css';
-import './Compiler.css'; 
+import Editor from 'react-simple-code-editor';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-c';
+import 'prismjs/components/prism-cpp';
+import 'prismjs/themes/prism.css';
+import './Compiler.css';
 import { useParams } from 'react-router-dom';
 const host = process.env.REACT_APP_BACKEND_URL;
 
@@ -37,7 +37,7 @@ int main() {
         setLoading(true);
 
         try {
-            const { data } = await axios.post(`⁠ ${host}/run ⁠`, payload);
+            const { data } = await axios.post(`${host}/run`, payload);
             setOutput(data.output);
         } catch (error) {
             console.log(error.response);
@@ -52,7 +52,7 @@ int main() {
         console.log(id);
         setLoading(true);
         try {
-            const { data } = await axios.post(`⁠${host}/submitCode`, {id, code });
+            const { data } = await axios.post(`${host}/submitCode`, { id, code });
             setResults([data.results]);
             console.log('Submission result:', data); // Assume one test case based on your example
         } catch (error) {
@@ -67,9 +67,10 @@ int main() {
         <div className="compiler-container">
             <div className="editor-section">
                 <h1>Online Code Compiler</h1>
-                
+                <Editor
                     value={code}
                     onValueChange={code => setCode(code)}
+                    highlight={code => Prism.highlight(code, Prism.languages.cpp, 'cpp')}
                     padding={10}
                     style={{
                         fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -78,6 +79,7 @@ int main() {
                         height: '300px',
                         overflowY: 'auto'
                     }}
+                />
                 <button onClick={handleRun} disabled={loading}>
                     {loading ? 'Running...' : 'Run Code'}
                 </button>
