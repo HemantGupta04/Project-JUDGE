@@ -27,7 +27,7 @@ const CreateProblem = () => {
             formData.append('inputFile', inputFile);
             formData.append('outputFile', outputFile);
 
-            await axios.post(`⁠ ${host}/api/problems `, formData);
+            await axios.post(`${host}/api/problems`, formData);
 
             setMessage('Problem created successfully!');
             setTimeout(() => {
