@@ -31,7 +31,7 @@ dotenv.config({ path: './../ONLINEJUDGE/backend/.env' });
 const app = express();
 const upload = multer(); // Initialize multer for file uploads
 app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your frontend URL
+    origin: 'https://project-online-judge.vercel.app/', // Replace with your frontend URL
     credentials: true,
 }));
 
