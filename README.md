@@ -219,4 +219,4 @@ git commit -m "Add feature: your feature name"
 1. Add question filter and choose the quetion according to filters.
 2. leaderboard
 3. customise Result part with styling.
-4. Deployment of backend in AWS and frontend in vercel.
+4. Make this site to hold contests.
