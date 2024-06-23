@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 <img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/frontend/src/logo.png" marginLeft="100" height="500" width="500" />
 
-## USP
+## AIM
 As an engineering student seeking a good internship, I noticed that I couldn't attempt previously asked questions by companies in their online assessments (OAs) and interviews. Therefore, I decided to create an app where I can upload these questions after attempting them in my OAs also ask my friend to also do so. This way, upcoming juniors can freely access and leverage these resources.
 
 
@@ -19,11 +19,10 @@ As an engineering student seeking a good internship, I noticed that I couldn't a
   6. Backend
   7. Frontend
   8. Environment Variables
-  9. Usage
-  10. Contributing
-  11. Future goals.
-
-
+  9. Deployment.
+  10. Usage
+  11. Contributing
+  12. Future goals
 
 
 
@@ -51,6 +50,10 @@ This is a full-stack online judge platform built with the MERN stack (MongoDB, E
 
 #### Authentication: JWT (JSON Web Token)
 <img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/jwt.png" height="150" width="250"/>
+
+#### Deployment: AWS EC2, ECR ,Vercel
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/AWS.jpeg" height="150" width="250"/>
+<img src="https://github.com/HemantGupta04/Project-OnlineJudge/blob/main/Vercel.png" height="150" width="250"/>
 
 
 ### Prerequisites
@@ -151,6 +154,8 @@ volumes:
 ```git
 Docker-compose up -d
 ```
+## Website
+ https://project-online-judge.vercel.app
 
 ## Usage
 
